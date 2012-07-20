@@ -16,6 +16,6 @@ end
 desc 'Post a few test lines to the online log'
 task :test_post do
   require 'rest-client'
-  RestClient.post 'http://microlog.herokuapp.com/my_log', 'actually works!'
-  RestClient.post 'http://microlog.herokuapp.com/and', 'it\'s amazing'
+  RestClient.post 'http://microlog.herokuapp.com/my_log/actually_works'
+  RestClient.post 'http://microlog.herokuapp.com/and/it_is_amazing'
 end
