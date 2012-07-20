@@ -11,9 +11,13 @@ class MicrologTest < Test::Unit::TestCase
     Sinatra::Application
   end
 
-  def test_it_says_hello_world
+  def test_it_shows_logs
+    post '/my_key', 'something logged'
+    post '/another_key', 'something else logged'
+
     get '/'
     assert last_response.ok?
-    assert_equal 'Hello, world', last_response.body
+    expected = "my_key: something logged\nanother_key: something else logged"
+    assert_equal expected, last_response.body
   end
 end
