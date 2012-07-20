@@ -17,8 +17,8 @@ get '/' do
       :locals => { :lines => LOG.map {|k, v| "#{k}: #{v}"} }
 end
 
-post '/:key' do
-  LOG[params[:key]] = request.body.read
+post '/:key/:text' do
+  LOG[params[:key]] = params[:text]
 end
 
 delete '/' do
