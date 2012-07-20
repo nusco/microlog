@@ -18,8 +18,8 @@ class MicrologTest < Test::Unit::TestCase
 
     get '/'
     assert last_response.ok?
-    expected = "my_key: something logged\nanother_key: something different logged"
-    assert_equal expected, last_response.body
+    assert last_response.body =~ /my_key: something logged/
+    assert last_response.body =~ /another_key: something different logged/
   end
 
   def test_it_deletes_logs
@@ -28,6 +28,6 @@ class MicrologTest < Test::Unit::TestCase
 
     get '/'
     assert last_response.ok?
-    assert_equal "", last_response.body
+    assert last_response.body !~ /something/
   end
 end

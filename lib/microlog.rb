@@ -3,7 +3,13 @@ require 'sinatra'
 LOG = {}
 
 get '/' do
-  erb "<%= lines.join(\"\n\") %>",
+  erb "<html>
+       <head><title>microlog</title></head>
+       <body>
+         <% lines.each do |line| %>
+         <%= line %><br/>
+         <% end %>
+       </body>",
       :locals => { :lines => LOG.map {|k, v| "#{k}: #{v}"} }
 end
 
