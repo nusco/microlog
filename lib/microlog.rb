@@ -3,7 +3,8 @@ require 'sinatra'
 LOG = {}
 
 get '/' do
-  LOG.map {|k, v| "#{k}: #{v}"}.join "\n"
+  erb "<%= lines.join(\"\n\") %>",
+      :locals => { :lines => LOG.map {|k, v| "#{k}: #{v}"} }
 end
 
 post '/:key' do
