@@ -9,3 +9,7 @@ end
 post '/:key' do
   LOG[params[:key]] = request.body.read
 end
+
+delete '/' do
+  LOG.clear
+end
