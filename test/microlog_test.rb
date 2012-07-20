@@ -14,12 +14,19 @@ class MicrologTest < Test::Unit::TestCase
   def test_it_shows_logs
     post '/my_key', 'something logged'
     post '/another_key', 'something else logged'
-    post '/another_key', 'something different logged'
 
     get '/'
-    assert last_response.ok?
     assert last_response.body =~ /my_key: something logged/
-    assert last_response.body =~ /another_key: something different logged/
+    assert last_response.body =~ /another_key: something else logged/
+  end
+
+  def test_it_overrides_logs
+    post '/my_key', 'something logged'
+    post '/my_key', 'something different logged'
+
+    get '/'
+    assert last_response.body !~ /my_key: something logged/
+    assert last_response.body =~ /my_key: something different logged/
   end
 
   def test_it_deletes_logs
@@ -27,7 +34,6 @@ class MicrologTest < Test::Unit::TestCase
     delete '/'
 
     get '/'
-    assert last_response.ok?
     assert last_response.body !~ /something/
   end
 end
